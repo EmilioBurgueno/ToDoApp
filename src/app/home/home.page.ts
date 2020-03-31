@@ -11,6 +11,8 @@ import { EditPage } from '../modals/edit/edit.page';
 })
 export class HomePage implements OnInit {
 
+  viewMode = 'ToDo';
+
   today = Date.now();
 
   Items: Item[] = [

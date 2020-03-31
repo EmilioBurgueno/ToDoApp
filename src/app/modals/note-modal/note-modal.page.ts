@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-note-modal',
@@ -8,7 +8,8 @@ import { ModalController } from '@ionic/angular';
 })
 export class NoteModalPage implements OnInit {
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController,
+              private alertCtrl: AlertController) { }
 
   ngOnInit() {
   }
@@ -17,7 +18,18 @@ export class NoteModalPage implements OnInit {
     await this.modalCtrl.dismiss();
   }
 
+  async addAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Success!',
+      message: 'Your To-Do has been created succesfully',
+      buttons: ['OKAY']
+    });
+
+    await alert.present();
+  }
+
   Add() {
     console.log('add');
   }
+  
 }
