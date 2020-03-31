@@ -4,7 +4,15 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'note-modal',
+    loadChildren: () => import('./modals/note-modal/note-modal.module').then( m => m.NoteModalPageModule)
+  },
+  {
+    path: 'edit',
+    loadChildren: () => import('./modals/edit/edit.module').then( m => m.EditPageModule)
   }
 ];
 @NgModule({
