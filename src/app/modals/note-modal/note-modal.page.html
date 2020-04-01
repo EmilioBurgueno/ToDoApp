@@ -5,11 +5,14 @@
 </ion-header>
 
 <ion-content>
-    <ion-item>
-        <ion-label position="stacked">Description</ion-label>
-        <ion-input></ion-input>
-    </ion-item>
+    <form [formGroup]="addnoteForm">
+        <ion-item>
+            <ion-label position="stacked">Description</ion-label>
+            <ion-input formControlName="description"></ion-input>
+        </ion-item>
+        
+        <ion-button (click)="creatNote(); addAlert()" expand="block">Create</ion-button>
+      </form>
 
-    <ion-button (click)="Add(); addAlert()" expand="block">Create</ion-button>
     <ion-button (click)="closeModal()" expand="block" fill="outline">Cancel</ion-button>
 </ion-content>

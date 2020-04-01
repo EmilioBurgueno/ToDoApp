@@ -16,28 +16,23 @@ export class HomePage implements OnInit {
   today = Date.now();
 
   Items: Item[] = [
-  {
-      id: 'I001',
+    {
       descripcion: 'Nota 1',
       estado: false
     },
     {
-      id: "I002",
       descripcion: "Nota 2",
       estado: false
     },
     {
-      id: "I003",
       descripcion: "Nota 3",
       estado: false
     },
     {
-      id: "I004",
       descripcion: "Nota 4",
       estado: false
     },
     {
-      id: "I005",
       descripcion: "Nota 5",
       estado: false
     }
