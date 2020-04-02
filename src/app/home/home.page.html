@@ -21,13 +21,13 @@
     <ng-template #todo>
       <ion-list>
         <ion-item-sliding *ngFor="let item of Items">
-          <div *ngIf="item.estado == false">
+          <div *ngIf="item.estado == 'todo'">
             <ion-item-options side="start">
               <ion-item-option (click)="openModalEdit(item.id)">Edit</ion-item-option>
             </ion-item-options>
-            <ion-item>
+            <ion-item (click) = "sendDone(item.id,item.descripcion,item.estado)">
               <ion-label>{{item.descripcion}}</ion-label>
-              <ion-checkbox [(ngModel)]="item.estado"></ion-checkbox>
+              <ion-checkbox></ion-checkbox>
             </ion-item>
             <ion-item-options side="end">
               <ion-item-option color="danger" (click)="deleteNote(item.id)">Delete</ion-item-option>
@@ -40,13 +40,13 @@
     <ng-template #done>
       <ion-list>
         <ion-item-sliding *ngFor="let item of Items">
-          <div *ngIf="item.estado == true">
+          <div *ngIf="item.estado == 'done'">
             <ion-item-options side="start">
               <ion-item-option (click)="openModalEdit(item.id)">Edit</ion-item-option>
             </ion-item-options>
-            <ion-item>
+            <ion-item (click) = "sendDone(item.id,item.descripcion,item.estado)">
               <ion-label>{{item.descripcion}}</ion-label>
-              <ion-checkbox [(ngModel)]="item.estado"></ion-checkbox>
+              <ion-checkbox></ion-checkbox>
             </ion-item>
             <ion-item-options side="end">
               <ion-item-option color="danger" (click)="deleteNote(item.id)">Delete</ion-item-option>

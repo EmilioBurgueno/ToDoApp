@@ -3,6 +3,7 @@ import { ModalController, AlertController } from '@ionic/angular';
 import { NoteService } from 'src/app/services/note.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-note-modal',
   templateUrl: './note-modal.page.html',
@@ -32,7 +33,7 @@ export class NoteModalPage implements OnInit {
 
       const note = {
         descripcion: desc,
-        estado: false
+        estado: 'todo'  
       };
 
       this.noteService.createNote(note).then(() => {
@@ -63,6 +64,8 @@ export class NoteModalPage implements OnInit {
         }
       ]
     });
+
+    
 
     await alert.present();
   }

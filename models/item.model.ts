@@ -1,4 +1,4 @@
 export interface Item {
     descripcion: string;
-    estado: boolean;
+    estado: string;
 }
