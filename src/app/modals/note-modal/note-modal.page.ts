@@ -26,7 +26,7 @@ export class NoteModalPage implements OnInit {
     });
   }
   
-  createNote() {
+  createNote(): void{
     if(this.addnoteForm.valid) {
       const desc = this.addnoteForm.controls.description.value;
 
@@ -36,7 +36,7 @@ export class NoteModalPage implements OnInit {
       };
 
       this.noteService.createNote(note).then(() => {
-        console.log("Note Created");
+        this.addAlert()
       }).catch((error) => {
         console.log(error)
       });
@@ -54,7 +54,14 @@ export class NoteModalPage implements OnInit {
     const alert = await this.alertCtrl.create({
       header: 'Success!',
       message: 'Your To-Do has been created succesfully',
-      buttons: ['OKAY']
+      buttons: [
+        {
+          text: 'OKAY',
+          handler: () => {
+            this.closeModal();
+          }
+        }
+      ]
     });
 
     await alert.present();

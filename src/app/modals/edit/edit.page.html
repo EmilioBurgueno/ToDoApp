@@ -5,11 +5,12 @@
 </ion-header>
 
 <ion-content>
-    <ion-item>
-        <ion-label position="stacked">Description</ion-label>
-        <ion-input></ion-input>
-    </ion-item>
-
-    <ion-button (click)="Update(); editAlert()" expand="block">Update</ion-button>
+    <form [formGroup]="editnoteForm">
+        <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-input formControlName="descripcion"></ion-input>
+        </ion-item>
+    </form>
+    <ion-button (click)="updateNote()" expand="block">Update</ion-button>
     <ion-button (click)="closeModal()" expand="block" fill="outline">Cancel</ion-button>
 </ion-content>

@@ -23,14 +23,14 @@
         <ion-item-sliding *ngFor="let item of Items">
           <div *ngIf="item.estado == false">
             <ion-item-options side="start">
-              <ion-item-option (click)="openModalEdit()">Edit</ion-item-option>
+              <ion-item-option (click)="openModalEdit(item.id)">Edit</ion-item-option>
             </ion-item-options>
             <ion-item>
               <ion-label>{{item.descripcion}}</ion-label>
               <ion-checkbox [(ngModel)]="item.estado"></ion-checkbox>
             </ion-item>
             <ion-item-options side="end">
-              <ion-item-option color="danger" (click)="Borrar()">Delete</ion-item-option>
+              <ion-item-option color="danger" (click)="deleteNote(item.id)">Delete</ion-item-option>
             </ion-item-options>
           </div>
         </ion-item-sliding>
@@ -42,14 +42,14 @@
         <ion-item-sliding *ngFor="let item of Items">
           <div *ngIf="item.estado == true">
             <ion-item-options side="start">
-              <ion-item-option (click)="openModalEdit()">Edit</ion-item-option>
+              <ion-item-option (click)="openModalEdit(item.id)">Edit</ion-item-option>
             </ion-item-options>
             <ion-item>
               <ion-label>{{item.descripcion}}</ion-label>
               <ion-checkbox [(ngModel)]="item.estado"></ion-checkbox>
             </ion-item>
             <ion-item-options side="end">
-              <ion-item-option color="danger" (click)="Borrar()">Delete</ion-item-option>
+              <ion-item-option color="danger" (click)="deleteNote(item.id)">Delete</ion-item-option>
             </ion-item-options>
           </div>
         </ion-item-sliding>

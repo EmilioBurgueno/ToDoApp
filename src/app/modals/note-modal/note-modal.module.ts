@@ -12,7 +12,7 @@ import { NoteModalPage } from './note-modal.page';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule, 
+    IonicModule,
     NoteModalPageRoutingModule,
     ReactiveFormsModule
   ],

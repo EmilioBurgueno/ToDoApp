@@ -7,12 +7,10 @@
 <ion-content>
     <form [formGroup]="addnoteForm">
         <ion-item>
-            <ion-label position="stacked">Description</ion-label>
+            <ion-label position="floating">Description</ion-label>
             <ion-input formControlName="description"></ion-input>
         </ion-item>
-        
-        <ion-button (click)="creatNote(); addAlert()" expand="block">Create</ion-button>
-      </form>
-
+    </form>
+    <ion-button (click)="createNote()" expand="block">Create</ion-button>
     <ion-button (click)="closeModal()" expand="block" fill="outline">Cancel</ion-button>
 </ion-content>

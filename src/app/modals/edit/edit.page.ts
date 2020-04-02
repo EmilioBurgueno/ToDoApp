@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalController, AlertController, NavParams } from '@ionic/angular';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NoteService } from 'src/app/services/note.service';
+import { Item } from 'models/item.model';
 
 @Component({
   selector: 'app-edit',
@@ -8,10 +11,53 @@ import { ModalController, AlertController } from '@ionic/angular';
 })
 export class EditPage implements OnInit {
 
+  @Input() nID: string;
+
+  editnoteForm: FormGroup;
+
+  note: Item;
+
   constructor(private modalCtrl: ModalController,
-              private alertCtrl: AlertController) { }
+              private alertCtrl: AlertController,
+              private navParams: NavParams,
+              private noteService: NoteService) { }
 
   ngOnInit() {
+    const nID = this.navParams.get('nID');
+    this.getNote(nID);
+    this.initForm();
+  }
+
+  getNote(noteId: string) {
+    this.noteService.getNote(noteId).subscribe((note) => {
+      this.note=note;
+      console.log(note);
+      this.patchForm();
+    })
+  }
+
+  updateNote() {
+    const updatedNote = {
+      ...this.editnoteForm.value
+    };
+
+    this.noteService.updateNote(this.nID, updatedNote).then(() => {
+      this.editAlert();
+    }).catch((error) => {
+      console.log(error)
+    });
+  }
+
+  patchForm() {
+    this.editnoteForm.patchValue({
+      descripcion: this.note.descripcion
+    })
+  }
+
+  initForm() {
+    this.editnoteForm = new FormGroup({
+      descripcion: new FormControl(null, [Validators.required])
+    });
   }
 
   async closeModal() {
@@ -22,13 +68,16 @@ export class EditPage implements OnInit {
     const alert = await this.alertCtrl.create({
       header: 'Success!',
       message: 'Your To-Do has been updated successfully',
-      buttons: ['OKAY']
+      buttons: [
+        {
+          text: 'OKAY',
+          handler: () => {
+            this.closeModal();
+          }
+        }
+      ]
     });
 
     await alert.present();
-  }
-
-  Update() {
-    console.log('update');
   }
 }

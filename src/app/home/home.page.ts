@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { NoteModalPage } from '../modals/note-modal/note-modal.page';
 import { Item } from 'models/item.model';
 import { EditPage } from '../modals/edit/edit.page';
+import { NoteService } from '../services/note.service';
 
 @Component({
   selector: 'app-home',
@@ -15,32 +16,14 @@ export class HomePage implements OnInit {
 
   today = Date.now();
 
-  Items: Item[] = [
-    {
-      descripcion: 'Nota 1',
-      estado: false
-    },
-    {
-      descripcion: "Nota 2",
-      estado: false
-    },
-    {
-      descripcion: "Nota 3",
-      estado: false
-    },
-    {
-      descripcion: "Nota 4",
-      estado: false
-    },
-    {
-      descripcion: "Nota 5",
-      estado: false
-    }
-  ];
+  Items: Item[] = [];
 
-  constructor( private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController,
+              private alertCtrl: AlertController,
+              private noteService: NoteService) { }
 
   ngOnInit() {
+    this.getNotes();
   }
 
   // Modal
@@ -51,24 +34,40 @@ export class HomePage implements OnInit {
     return await modal.present();
   }
 
-  async openModalEdit() {
+  async openModalEdit(noteId: string) {
     const modal = await this.modalCtrl.create({
-      component: EditPage
+      component: EditPage,
+      componentProps: {
+        'nID': noteId
+      }
     });
     return await modal.present();
   }
 
-  // Segments
-
-  segmentChanged(ev: any) {
-    console.log('Segment changed', ev);
-  }
-
   // funciones
 
-  Borrar() {
-
+  getNotes() {
+    this.noteService.getNotes().subscribe((notes) => {
+      this.Items = notes;
+    })
   }
 
+  deleteNote(noteId: string) {
+    this.noteService.deleteNote(noteId).then(() => {
+      this.addAlert();
+    }).catch((error) => {
+      console.log(error)
+    });
+  }
+
+  async addAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Success!',
+      message: 'Your To-Do has been deleted succesfully',
+      buttons: ['OKAY']
+    });
+
+    await alert.present();
+  }
 
 }
