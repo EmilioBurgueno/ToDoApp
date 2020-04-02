@@ -53,53 +53,49 @@ export class HomePage implements OnInit {
     });
   }
 
+  async Alert(funcion: string) {
+    if (funcion === "delete") {
+      const alert = await this.alertCtrl.create({
+        header: "Success!",
+        message: "Your To-Do has been deleted succesfully",
+        buttons: ["OKAY"]
+      });
+      await alert.present();
+    } else if (funcion === "tD") {
+      const alert = await this.alertCtrl.create({
+        header: "Well done!",
+        message: "Very good, one more to-do done. Keep going!",
+        buttons: ["OKAY"]
+      });
+      await alert.present();
+    } else if (funcion === "dT") {
+      const alert = await this.alertCtrl.create({
+        header: "No worries!",
+        message: "Not done yet?, no problem, keep working on that!",
+        buttons: ["OKAY"]
+      });
+      await alert.present();
+    }
+  }
+
   deleteNote(noteId: string) {
     this.noteService
       .deleteNote(noteId)
       .then(() => {
-        this.deleteAlert();
+        this.Alert("delete");
       })
       .catch(error => {
         console.log(error);
       });
   }
 
-  async deleteAlert() {
-    const alert = await this.alertCtrl.create({
-      header: "Success!",
-      message: "Your To-Do has been deleted succesfully",
-      buttons: ["OKAY"]
-    });
-
-    await alert.present();
-  }
-
-  async todoAlert() {
-    const alert = await this.alertCtrl.create({
-      header: "Well done!",
-      message: "Very good, one more to-do done. Keep going!",
-      buttons: ["OKAY"]
-    });
-
-    await alert.present();
-  }
-
-  async doneAlert() {
-    const alert = await this.alertCtrl.create({
-      header: "No worries!",
-      message: "Not done yet?, no problem, keep working on that!",
-      buttons: ["OKAY"]
-    });
-
-    await alert.present();
-  }
-
-  sendDone(noteId: string, noteDes: string, noteEst: string) { 
+  changeStatus(noteId: string, noteDes: string, noteEst: string) {
     if (noteEst === "todo") {
       noteEst = "done";
-    }
-    else {
+      this.Alert("tD");
+    } else {
       noteEst = "todo";
+      this.Alert("dT");
     }
     const updatedNote = {
       estado: noteEst,
@@ -108,7 +104,7 @@ export class HomePage implements OnInit {
     this.noteService
       .updateNote(noteId, updatedNote)
       .then(() => {
-        this.todoAlert();
+        console.log("Status Changed");
       })
       .catch(error => {
         console.log(error);

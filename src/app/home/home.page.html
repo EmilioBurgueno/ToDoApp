@@ -25,7 +25,7 @@
             <ion-item-options side="start">
               <ion-item-option (click)="openModalEdit(item.id)">Edit</ion-item-option>
             </ion-item-options>
-            <ion-item (click) = "sendDone(item.id,item.descripcion,item.estado)">
+            <ion-item (click) = "changeStatus(item.id,item.descripcion,item.estado)">
               <ion-label>{{item.descripcion}}</ion-label>
               <ion-checkbox></ion-checkbox>
             </ion-item>
@@ -44,7 +44,7 @@
             <ion-item-options side="start">
               <ion-item-option (click)="openModalEdit(item.id)">Edit</ion-item-option>
             </ion-item-options>
-            <ion-item (click) = "sendDone(item.id,item.descripcion,item.estado)">
+            <ion-item (click) = "changeStatus(item.id,item.descripcion,item.estado)">
               <ion-label>{{item.descripcion}}</ion-label>
               <ion-checkbox></ion-checkbox>
             </ion-item>
@@ -62,67 +62,4 @@
       </ion-fab-button>
     </ion-fab>
   
-  </ion-content> 
-  
-  
-<!-- <ion-header>
-    <ion-toolbar>
-        <ion-title>{{today | date}}</ion-title>
-    </ion-toolbar>
-</ion-header>
-
-<ion-content>
-    <ion-segment [(ngModel)]="viewMode">
-        <ion-segment-button value="ToDo">
-            <ion-label>To Do</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="Done">
-            <ion-label>Done</ion-label>
-        </ion-segment-button>
-    </ion-segment>
-
-    <div class="row" *ngIf="viewMode === 'ToDo' then todo else done">
-
-    </div>
-
-    <ng-template #todo>
-        <ion-list>
-            <ion-item-sliding *ngFor="let item of Items">
-                <ion-item-options side="start">
-                    <ion-item-option (click)="openModalEdit()">Edit</ion-item-option>
-                </ion-item-options>
-                <ion-item>
-                    <ion-label>{{item.descripcion}}</ion-label>
-                    <ion-checkbox [(ngModel)]="item.estado"></ion-checkbox>
-                </ion-item>
-                <ion-item-options side="end">
-                    <ion-item-option color="danger" (click)="Borrar()">Delete</ion-item-option>
-                </ion-item-options>
-            </ion-item-sliding>
-        </ion-list>
-    </ng-template>
-
-    <ng-template #done>
-        <ion-list>
-            <ion-item-sliding *ngFor="let item of Items">
-                <ion-item-options side="start">
-                    <ion-item-option (click)="openModalEdit()">Edit</ion-item-option>
-                </ion-item-options>
-                <ion-item>
-                    <ion-label>{{item.id}}</ion-label>
-                    <ion-checkbox [(ngModel)]="item.estado"></ion-checkbox>
-                </ion-item>
-                <ion-item-options side="end">
-                    <ion-item-option color="danger" (click)="Borrar()">Delete</ion-item-option>
-                </ion-item-options>
-            </ion-item-sliding>
-        </ion-list>
-    </ng-template>
-
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button>
-            <ion-icon (click)="openModal()" name="duplicate"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
-
-</ion-content> -->
+  </ion-content>
